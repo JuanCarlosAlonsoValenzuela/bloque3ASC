@@ -1,9 +1,10 @@
 import math
-
+import numpy as np
+import pandas as pd
 
 # generate x
 def zdt3(x, n):
-    out = [0.0, 0.0]
+    out = np.zeros((2,1))
     out[0] = x[0]
 
     tmp = 0.0
@@ -19,3 +20,9 @@ def zdt3(x, n):
     out[1] = f_2
 
     return out
+
+
+# get pareto front
+def get_pf(dat):
+    df = pd.read_csv(dat, sep='\t', header=None)
+    return df[0].to_numpy(), df[1].to_numpy()

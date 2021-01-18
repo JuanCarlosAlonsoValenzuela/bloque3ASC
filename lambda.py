@@ -3,7 +3,6 @@ import numpy as np
 
 # Vectores peso (lambda)
 # La suma de sus componentes debe ser 0 y tienen que estar uniformemente distribuidos
-from numpy import sort
 
 
 def generate_lambdas(N):
@@ -27,11 +26,8 @@ def get_lambdas_with_neighbors(lambdas, T):
     return lambdas_with_neighbors
 
 
+# TODO: DELETE
 lambdas_res = generate_lambdas(5)
 print(lambdas_res)
-
 lambdas_res_with_predicates = get_lambdas_with_neighbors(lambdas_res, 5)
-print(20*'-')
-
 print(lambdas_res_with_predicates)
-
