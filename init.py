@@ -1,5 +1,5 @@
 import numpy as np
-
+from random import random
 
 # Vectores peso (lambda)
 # La suma de sus componentes debe ser 0 y tienen que estar uniformemente distribuidos
@@ -26,8 +26,23 @@ def get_lambdas_with_neighbors(lambdas, T):
     return lambdas_with_neighbors
 
 
-# TODO: DELETE
-lambdas_res = generate_lambdas(5)
-print(lambdas_res)
-lambdas_res_with_predicates = get_lambdas_with_neighbors(lambdas_res, 5)
-print(lambdas_res_with_predicates)
+def generate_population(N, n):
+    population = np.zeros((N, n))
+
+    for i in range(N):
+        x = np.zeros((n,))
+        for j in range(n):
+            element = random()
+            x[j] = element
+        population[i] = x
+
+    return population
+
+
+
+
+# # TODO: DELETE
+# lambdas_res = generate_lambdas(5)
+# print(lambdas_res)
+# lambdas_res_with_predicates = get_lambdas_with_neighbors(lambdas_res, 5)
+# print(lambdas_res_with_predicates)
