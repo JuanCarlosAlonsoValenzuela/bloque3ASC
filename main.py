@@ -36,6 +36,10 @@ for i in range(len(population)):
 # Inital values of z
 z = np.array([np.amin(f_1), np.amin(f_2)])
 
+# Identify B (nearest neighbors)
+B = init.get_neighbors(N, T)
+
+
 # PLOT
 plt.plot(f_1, f_2, '.', color='b')
 plt.plot(pf_x, pf_y, '.', color='r')

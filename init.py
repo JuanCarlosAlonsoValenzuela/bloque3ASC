@@ -4,6 +4,11 @@ from random import random
 # Vectores peso (lambda)
 # La suma de sus componentes debe ser 0 y tienen que estar uniformemente distribuidos
 
+def get_neighbors(N, T):
+    lambdas = generate_lambdas(N)
+    lambdas_with_neighbors = get_lambdas_with_neighbors(lambdas, T)
+    return lambdas_with_neighbors
+
 
 def generate_lambdas(N):
     lambdas = []
