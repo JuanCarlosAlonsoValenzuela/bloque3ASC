@@ -20,16 +20,24 @@ dat = 'PF.dat'
 # Get Pareto Front
 pf_x, pf_y = zdt3.get_pf(dat)
 
-population = init.generate_population(N, n)
+##########################################################################
 
-f_1 = []
-f_2 = []
-for individual in population:
+# Initial population
+population = init.generate_population(N, n)     # x vectors (genotype)
+
+f_1 = np.zeros([100, 1])        # F1 (phenotype)
+f_2 = np.zeros([100, 1])        # F2 (phenotype)
+for i in range(len(population)):
+    individual = population[i]
     out = zdt3.zdt3(individual, n)
-    f_1.append(out[0])
-    f_2.append(out[1])
+    f_1[i] = out[0]
+    f_2[i] = out[1]
 
+# Inital values of z
+z = np.array([np.amin(f_1), np.amin(f_2)])
 
+# PLOT
 plt.plot(f_1, f_2, '.', color='b')
 plt.plot(pf_x, pf_y, '.', color='r')
+plt.plot(z[0], z[1], '*', color='g')
 plt.show()
