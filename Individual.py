@@ -11,7 +11,7 @@ class Individual:
             element = random()
             x[j] = element
 
-        f = zdt3.zdt3(x, n)
+        f = zdt3.zdt3(x)
         # TODO CHANGE TO NUMPY SCALARS
         self.x = x                          # Individual of n dimensions (genotype)
         self.f_1 = f[0]                     # f_1 (phenotype)
@@ -19,14 +19,12 @@ class Individual:
         self.lambda_vector = lambda_vector  # lambda
         self.neighbors = t_neighbors        # B
         self.g = None                       # g TODO: Inicializar con un valor alto o suponiendo z = (f_1, f_2)
+        self.y = np.zeros((n,))
 
-    def update_g(self, z):
+    def initialize_g(self, z):
 
-        g_1 = self.lambda_vector[0] * abs(self.f_1 - z[0])
-        g_2 = self.lambda_vector[1] * abs(self.f_2 - z[1])
-
-        self.g = max(g_1, g_2)
-
+        f_vector = np.array([self.f_1, self.f_2])
+        self.g = compute_g(f_vector, self.lambda_vector, z)
 
     def __str__(self):
 
@@ -40,3 +38,11 @@ g: {}
                    self.lambda_vector, self.neighbors,self.g)
 
         return r
+
+
+def compute_g(f, lambdas, z):
+
+    g_1 = lambdas[0] * abs(f[0] - z[0])
+    g_2 = lambdas[1] * abs(f[1] - z[1])
+
+    return max(g_1, g_2)

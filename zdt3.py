@@ -4,7 +4,8 @@ import pandas as pd
 
 
 # generate x
-def zdt3(x, n):
+def zdt3(x):
+    n = x.shape[0]      # Derivate n (30)
     out = np.zeros((2, 1))
     out[0] = x[0]
 

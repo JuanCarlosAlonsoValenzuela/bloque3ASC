@@ -43,6 +43,6 @@ def initialize_population(N, n, T):
 
     # Initialize g
     for individual in population:
-        individual.update_g(z)
+        individual.initialize_g(z)
 
     return population, z
