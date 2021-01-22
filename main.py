@@ -10,6 +10,10 @@ T = 20          # Neighborhood size
 G = 40          # Number of generations
 n = 30          # Number of dimensions
 
+# DE hyperparameters
+F = 0.5
+CR = 0.5
+
 # Seed random number generator
 seed(1)
 
@@ -24,15 +28,12 @@ pf_x, pf_y = zdt3.get_pf(dat)
 # Initial population and z
 population, z = inicialization.initialize_population(N, n, T)
 
-f_1 = np.zeros([N, 1])        # F1 (phenotype)
-f_2 = np.zeros([N, 1])        # F2 (phenotype)
-for i in range(N):
-    individual = population[i]
-    f_1[i] = individual.f_1
-    f_2[i] = individual.f_2
+# TODO: Evaluar vecinos de generación inicial (g_te en función de los vecinos)
 
-# Initial values of z (Minimum values)
-z = np.array([np.amin(f_1), np.amin(f_2)])
+# for individual in population: # TODO: Complete
+
+f_1, f_2 = zdt3.get_representation(population, N)
+
 
 print(population[0])
 print(z)
@@ -43,6 +44,7 @@ plt.plot(pf_x, pf_y, '.', color='r')
 plt.plot(z[0], z[1], '*', color='g')
 plt.show()
 
+
+
 # TODO: TESTS
 # Size of population is correct
-

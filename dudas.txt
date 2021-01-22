@@ -1,0 +1,3 @@
+Operador de mutación gaussiano (en la teoría no se hace)
+
+¿El valor de x_r1 es un vecino?

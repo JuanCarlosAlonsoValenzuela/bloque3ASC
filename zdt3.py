@@ -25,3 +25,15 @@ def zdt3(x, n):
 def get_pf(dat):
     df = pd.read_csv(dat, sep='\t', header=None)
     return df[0].to_numpy(), df[1].to_numpy()
+
+
+# return representation of a population8
+def get_representation(population, N):
+    f_1 = np.zeros([N, 1])  # F1 (phenotype)
+    f_2 = np.zeros([N, 1])  # F2 (phenotype)
+    for i in range(N):
+        individual = population[i]
+        f_1[i] = individual.f_1
+        f_2[i] = individual.f_2
+
+    return f_1, f_2
