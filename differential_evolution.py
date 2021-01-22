@@ -6,8 +6,9 @@ import Individual
 
 
 def differential_evolution(population, z, F, CR):
-    # TODO: Convert to for loop
+    # TODO: Add second mutation
     for individual in population:
+        # STEP 1: REPRODUCTION
         # Select 3 random neighbors (lambdas)
         lambda_selected_neighbors = individual.neighbors.copy()
         np.random.shuffle(lambda_selected_neighbors)
@@ -24,7 +25,7 @@ def differential_evolution(population, z, F, CR):
         x_r2 = selected_neighbors[1].x
         x_r3 = selected_neighbors[2].x
 
-        # MUTATION Generate mutant vector   TODO: upper and lower limits
+        # MUTATION Generate mutant vector
         v_g1 = x_r1 + F * (x_r2 - x_r3)
         # Check lower and upper value
         Individual.check_lower_and_upper_limit(v_g1)
@@ -36,30 +37,27 @@ def differential_evolution(population, z, F, CR):
         u_g1 = generate_crossover(x_r1, v_g1, CR)
         Individual.check_lower_and_upper_limit(u_g1)
 
+        # STEP 2: EVALUATION
         # This function changes the value of y and computes the value of F(y)
-        individual.add_and_evaluate_y(u_g1.copy())
+        fy = individual.add_and_evaluate_y(u_g1.copy())
 
+        # STEP 3: UPDATE Z
+        if fy[0] < z[0]:
+            z[0] = fy[0].copy()
+        if fy[1] < z[1]:
+            z[1] = fy[1].copy()
 
+    # STEP 4: UPDATE NEIGHBORS
+    for individual in population:
+        y = individual.y.copy()
+        neighbors_of_individual = individual.get_neighbors_of_individual(population)
+        # TODO: Para cada vecino,  comprobar si g es mejor, en caso afirmativo, reemplazar x por y
+        for single_neighbor in neighbors_of_individual:
+            # Updates the value of x of the neighbor if new_g < old_g
+            single_neighbor.compare_with_vector(y, z)
 
-
-    # # SELECTION: decide if trial vector (u_g1) enters the population
-    # # 2.-Evaluation Compute F(y)
-    # f_ug1 = zdt3.zdt3(u_g1)
-    # # Evaluate F(y) (ie. Compute gx)
-    # g_ug1 = Individual.compute_g(f_ug1, individual.lambda_vector, z)
-    #
-    # # Update z
-    # # If gx is smaller, replace x with u_g1
-    # # if g_ug1 < individual.gx:
-
-    # If replace, check usability for neighbors
-    # TODO: Update f_1 and f_2
     # TODO: Second mutation (gauss)
     # TODO: Compare with neighbors (G)
-
-    # TODO: Update z (This must be done at the end of a generation)
-
-    return None
 
 
 def generate_crossover(x, v, CR):
