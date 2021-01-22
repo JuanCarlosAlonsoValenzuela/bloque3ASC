@@ -34,7 +34,7 @@ def get_representation(population, N):
     f_2 = np.zeros([N, 1])  # F2 (phenotype)
     for i in range(N):
         individual = population[i]
-        f_1[i] = individual.f_1
-        f_2[i] = individual.f_2
+        f_1[i] = individual.fx[0]
+        f_2[i] = individual.fx[1]
 
     return f_1, f_2

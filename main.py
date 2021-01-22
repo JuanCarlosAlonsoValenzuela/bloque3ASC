@@ -16,7 +16,7 @@ F = 0.5
 CR = 0.5
 
 # Seed random number generator
-# seed(2)     # TODO: Change
+seed(1)     # TODO: Change
 
 # Paths
 dat = 'PF.dat'
@@ -36,10 +36,10 @@ f_1, f_2 = zdt3.get_representation(population, N)
 epoch = differential_evolution.differential_evolution(population, z, F, CR)
 
 # PLOT
-# plt.plot(f_1, f_2, '.', color='b')
-# plt.plot(pf_x, pf_y, '.', color='r')
-# plt.plot(z[0], z[1], '*', color='g')
-# plt.show()
+plt.plot(f_1, f_2, '.', color='b')
+plt.plot(pf_x, pf_y, '.', color='r')
+plt.plot(z[0], z[1], '*', color='g')
+plt.show()
 
 
 # TODO: TESTS

@@ -33,15 +33,15 @@ def initialize_population(N, n, T):
         individual = Individual(N, n,lambda_vector, t_neighbors)
 
         # Update z
-        if math.isnan(z[0]) or individual.f_1 < z[0]:
-            z[0] = individual.f_1
+        if math.isnan(z[0]) or individual.fx[0] < z[0]:
+            z[0] = individual.fx[0]
 
-        if math.isnan(z[1]) or individual.f_2 < z[1]:
-            z[1] = individual.f_2
+        if math.isnan(z[1]) or individual.fx[1] < z[1]:
+            z[1] = individual.fx[1]
 
         population.append(individual)
 
-    # Initialize g
+    # Initialize gx
     for individual in population:
         individual.initialize_g(z)
 
