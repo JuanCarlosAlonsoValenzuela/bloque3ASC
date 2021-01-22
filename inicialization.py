@@ -1,5 +1,4 @@
 import numpy as np
-from random import random
 from Individual import Individual
 import math
 
@@ -41,5 +40,9 @@ def initialize_population(N, n, T):
             z[1] = individual.f_2
 
         population.append(individual)
+
+    # Initialize g
+    for individual in population:
+        individual.update_g(z)
 
     return population, z
