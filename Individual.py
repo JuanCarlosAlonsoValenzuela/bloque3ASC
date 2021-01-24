@@ -15,7 +15,7 @@ class Individual:
         self.fx = zdt3.zdt3(x)              # f(x) (phenotype)
         self.lambda_vector = lambda_vector  # lambda
         self.neighbors = t_neighbors        # B
-        self.gx = None                       # gx TODO: Inicializar con un valor alto o suponiendo z = (f_1, f_2)
+        self.gx = None                       # gx
         self.y = np.zeros((n,))
 
     def update_x(self, new_x, new_g):
@@ -67,3 +67,9 @@ def check_lower_and_upper_limit(vector):
             vector[i] = 0.0
         if vector[i] > 1.0:
             vector[i] = 1.0
+
+
+def mutate_with_gaussian_distribution(vector_to_mutate, sigma):
+    for i in range(vector_to_mutate.shape[0]):
+        vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
+    check_lower_and_upper_limit(vector_to_mutate)

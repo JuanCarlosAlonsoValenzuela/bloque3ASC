@@ -6,14 +6,18 @@ import math
 # Vectores peso (lambda)
 # La suma de sus componentes debe ser 0 y tienen que estar uniformemente distribuidos
 def generate_lambdas(N):
-    lambdas = []
-    increment = 1.0/(N - 1.0)
-    x = 0.0
+    lambdas = np.zeros([N,2])
+    increment = np.array([1.0])/(np.array([N - 1.0]))
+    x = np.array([0.0])
+    i = 0
     while x <= 1.0:
-        lambdas.append([x, 1.0 - x])
-        x = round(x + increment, 10)
+        # lambdas[0][i] = np.array([x, 1.0 - x])
+        lambdas[i][0] = x
+        lambdas[i][1] = 1.0 - x
+        x = x + increment
+        i = i + 1
 
-    return np.array(lambdas)
+    return lambdas
 
 
 def initialize_population(N, n, T):
