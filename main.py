@@ -8,11 +8,11 @@ import differential_evolution
 # HYPERPARAMETERS:
 N = 40         # Population size
 T = 8          # Neighborhood size
-G = 400         # Number of generations
-n = 100          # Number of dimensions
+G = 100         # Number of generations
+n = 30          # Number of dimensions
 
 # DE hyperparameters
-F = np.array([0.8])
+F = np.array([0.6])
 CR = 0.5
 
 # Gaussian hyperparameters

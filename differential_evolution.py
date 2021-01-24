@@ -21,9 +21,9 @@ def differential_evolution(population, z, F, CR, sigma):
                 selected_neighbors.append(neighbor_candidate)
 
         # Compute next generation
-        x_r1 = selected_neighbors[0].x
-        x_r2 = selected_neighbors[1].x
-        x_r3 = selected_neighbors[2].x
+        x_r1 = selected_neighbors[0].x.copy()
+        x_r2 = selected_neighbors[1].x.copy()
+        x_r3 = selected_neighbors[2].x.copy()
 
         # MUTATION Generate mutant vector
         v_g1 = x_r1 + F * (x_r2 - x_r3)

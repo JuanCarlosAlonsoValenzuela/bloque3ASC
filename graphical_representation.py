@@ -34,54 +34,15 @@ fig.suptitle('Comparison')
 
 point_size = 0.3
 
-axs[0, 0].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[0])
-axs[0, 0].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[0, 0].set_title('Seed 1')
-
-axs[0, 1].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[1])
-axs[0, 1].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[0, 1].set_title('Seed 2')
-
-axs[0, 2].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[2])
-axs[0, 2].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[0, 2].set_title('Seed 3')
-
-############################################
-
-axs[1, 0].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[3])
-axs[1, 0].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[1, 0].set_title('Seed 4')
-
-axs[1, 1].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[4])
-axs[1, 1].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[1, 1].set_title('Seed 5')
-
-axs[1, 2].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[5])
-axs[1, 2].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[1, 2].set_title('Seed 6')
-
-############################################
-
-axs[2, 0].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[6])
-axs[2, 0].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[2, 0].set_title('Seed 7')
-
-axs[2, 1].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[7])
-axs[2, 1].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[2, 1].set_title('Seed 8')
-
-axs[2, 2].scatter(pf_x, pf_y, color='r', s=point_size)
-nsgaii = get_nsgaii(paths[8])
-axs[2, 2].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
-axs[2, 2].set_title('Seed 9')
+k=0
+for i in range(3):
+    for j in range(3):
+        axs[i, j].scatter(pf_x, pf_y, color='r', s=point_size)
+        nsgaii = get_nsgaii(paths[k])
+        axs[i, j].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
+        axs[i, j].set_title('Seed {}'.format(k+1))
+        axs[i, j].set_ylim([-0.8, 1.3])
+        k = k + 1
 
 for ax in fig.get_axes():
     ax.label_outer()
