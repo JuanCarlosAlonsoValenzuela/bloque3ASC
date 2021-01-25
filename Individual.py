@@ -12,19 +12,12 @@ class Individual:
 
         # TODO CHANGE TO NUMPY SCALARS
         self.x = x                          # Individual of n dimensions (genotype)
-        self.fx = zdt3.zdt3(x)              # f(x) (phenotype)
         self.lambda_vector = lambda_vector  # lambda
         self.neighbors = t_neighbors        # B
-        self.gx = None                       # gx
         self.y = np.zeros((n,))
 
-    def update_x(self, new_x, new_g):
+    def update_x(self, new_x):
         self.x = new_x
-        self.fx = zdt3.zdt3(new_x)
-        self.gx = new_g
-
-    def initialize_g(self, z):
-        self.gx = compute_g(self.fx, self.lambda_vector, z)
 
     def add_and_evaluate_y(self, y_vector):
         self.y = y_vector
@@ -38,18 +31,18 @@ class Individual:
         return neighbors_res
 
     def compare_with_vector(self, vector, z):
-        f = zdt3.zdt3(vector)
-        g = compute_g(f, self.lambda_vector, z)
-
-        # Update x (and derivates) if g<self.gx
-        if g < self.gx:
-            self.update_x(vector, g)
+        new_f = zdt3.zdt3(vector)
+        new_g = compute_g(new_f, self.lambda_vector, z)
+        old_f = zdt3.zdt3(self.x)
+        old_g = compute_g(old_f, self.lambda_vector, z)
+        # Update x (and derives) if g<self.gx
+        if new_g <= old_g:      # TODO: is <=, not <
+            self.update_x(vector)
 
     def __str__(self):
         r = 'x: {} \n' \
             'f: {} \n' \
-            'lambda: {} \n' \
-            'gx: {}'.format(self.x, self.fx, self.lambda_vector, self.gx)
+            'lambda: {}'.format(self.x, zdt3.zdt3(self.x), self.lambda_vector)
         return r
 
 
@@ -68,8 +61,11 @@ def check_lower_and_upper_limit(vector):
 
 
 def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
-    for i in range(vector_to_mutate.shape[0]):
-        random_value = random()
-        if random_value <= PR:
-            vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
+    random_value = random()
+    if random_value <= PR:
+        vector_to_mutate[0] = vector_to_mutate[0] + np.random.normal(0.0, sigma)
+    # for i in range(vector_to_mutate.shape[0]):
+    #     random_value = random()
+    #     if random_value <= PR:
+    #         vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
     check_lower_and_upper_limit(vector_to_mutate)

@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 # generate x
@@ -34,7 +35,47 @@ def get_representation(population, N):
     f_2 = np.zeros([N, 1])  # F2 (phenotype)
     for i in range(N):
         individual = population[i]
-        f_1[i] = individual.fx[0]
-        f_2[i] = individual.fx[1]
+        fx = zdt3(individual.x)
+        f_1[i] = fx[0]
+        f_2[i] = fx[1]
 
     return f_1, f_2
+
+
+def get_representation_of_weights(individual):
+    point1 = [0.0, 0.0]
+    x_values = [point1[0], 6*individual.lambda_vector[0]]
+    y_values = [point1[1], 6*individual.lambda_vector[1]]
+
+    # Print lambda
+    plt.plot(x_values, y_values, color='b')
+    plt.xlim([0.0, 6.0])
+    plt.ylim([0.0, 6.0])
+
+    for neighbor in individual.neighbors:
+        if neighbor[0] != individual.lambda_vector[0] and neighbor[1] != individual.lambda_vector[1]:
+            x_values = [point1[0], 6*neighbor[0]]
+            y_values = [point1[1], 6*neighbor[1]]
+            plt.plot(x_values, y_values, color='r')
+
+    # plt.show()
+
+
+def get_representation_of_all_weights(population):
+    point1 = [0.0, 0.0]
+    for individual in population:
+        x_values = [point1[0], 6*individual.lambda_vector[0]]
+        y_values = [point1[1], 6*individual.lambda_vector[1]]
+
+        # Print lambda
+        plt.plot(x_values, y_values, color='b')
+        plt.xlim([0.0, 6.0])
+        plt.ylim([0.0, 6.0])
+
+        for neighbor in individual.neighbors:
+            if neighbor[0] != individual.lambda_vector[0] and neighbor[1] != individual.lambda_vector[1]:
+                x_values = [point1[0], 6*neighbor[0]]
+                y_values = [point1[1], 6*neighbor[1]]
+                plt.plot(x_values, y_values, color='r')
+
+        plt.show()

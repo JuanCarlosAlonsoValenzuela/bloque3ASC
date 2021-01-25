@@ -13,11 +13,17 @@ from random import random
 # fx = zdt3.zdt3(x)
 # print(fx)
 
+point1 = [0.0, 0.0]
+point2 = [1.0, 0.0]
+x_values = [point1[0], point2[0]]
+y_values = [point1[1], point2[1]]
 
-for i in range(30):
-    value = random()
-    if value <= (1.0/30.0):
-        print(value)
+plt.plot(x_values, y_values)
+plt.show()
+# for i in range(30):
+#     value = random()
+#     if value <= (1.0/30.0):
+#         print(value)
 
 # print(1.0/30.)
 # for i in range(3):

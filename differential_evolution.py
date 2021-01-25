@@ -55,12 +55,15 @@ def differential_evolution(population, z, F, CR, sigma, PR):
     for individual in population:
         y = individual.y.copy()
 
+        # print('Lambda vector of individual: {}'.format(individual.lambda_vector))
+
         # TODO: After (do not compare with neighbors)
         # individual.compare_with_vector(y, z)
         # TODO: Before (compare with all neighbors)
         neighbors_of_individual = individual.get_neighbors_of_individual(population)
         # Para cada vecino,  comprobar si g es mejor, en caso afirmativo, reemplazar x por y
         for single_neighbor in neighbors_of_individual:
+            # print('Lambda vector of neighbor: {}'.format(single_neighbor.lambda_vector))
             # Updates the value of x of the neighbor if new_g < old_g
             single_neighbor.compare_with_vector(y, z)
 

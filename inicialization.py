@@ -1,6 +1,7 @@
 import numpy as np
 from Individual import Individual
 import math
+import zdt3
 
 
 # Vectores peso (lambda)
@@ -9,13 +10,19 @@ def generate_lambdas(N):
     lambdas = np.zeros([N,2])
     increment = np.array([1.0])/(np.array([N - 1.0]))
     x = np.array([0.0])
-    i = 0
-    while x <= 1.0:
-        # lambdas[0][i] = np.array([x, 1.0 - x])
+
+    for i in range(N):
         lambdas[i][0] = x
         lambdas[i][1] = 1.0 - x
         x = x + increment
-        i = i + 1
+
+    # i = 0
+    # while x <= 1.0:
+    #     #     # lambdas[0][i] = np.array([x, 1.0 - x])
+    #     #     lambdas[i][0] = x
+    #     #     lambdas[i][1] = 1.0 - x
+    #     #     x = x + increment
+    #     #     i = i + 1
 
     return lambdas
 
@@ -23,7 +30,7 @@ def generate_lambdas(N):
 def initialize_population(N, n, T):
     population = []
     lambdas = generate_lambdas(N)
-    # print(lambdas)
+    print(lambdas)
 
     # z vector
     z = np.zeros((2,))
@@ -37,17 +44,18 @@ def initialize_population(N, n, T):
         # Create new individual
         individual = Individual(N, n,lambda_vector, t_neighbors)
 
+        fx = zdt3.zdt3(individual.x)
         # Update z
-        if math.isnan(z[0]) or individual.fx[0] < z[0]:
-            z[0] = individual.fx[0]
+        if math.isnan(z[0]) or fx[0] < z[0]:
+            z[0] = fx[0]
 
-        if math.isnan(z[1]) or individual.fx[1] < z[1]:
-            z[1] = individual.fx[1]
+        if math.isnan(z[1]) or fx[1] < z[1]:
+            z[1] = fx[1]
 
         population.append(individual)
 
-    # Initialize gx
-    for individual in population:
-        individual.initialize_g(z)
+    # Initialize gx TODO: DELETE
+    # for individual in population:
+    #     individual.initialize_g(z)
 
     return population, z
