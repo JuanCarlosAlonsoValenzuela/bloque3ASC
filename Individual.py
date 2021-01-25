@@ -49,9 +49,7 @@ class Individual:
         r = 'x: {} \n' \
             'f: {} \n' \
             'lambda: {} \n' \
-            'neighbors: {} \n' \
-            'gx: {}'.format(self.x, self.fx,
-                            self.lambda_vector, self.neighbors, self.gx)
+            'gx: {}'.format(self.x, self.fx, self.lambda_vector, self.gx)
         return r
 
 

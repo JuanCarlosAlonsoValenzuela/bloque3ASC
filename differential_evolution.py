@@ -33,14 +33,13 @@ def differential_evolution(population, z, F, CR, sigma, PR):
 
 
         # CROSSOVER to increase diversity
-
         # generate y
         # Check lower and upper value
         u_g1 = generate_crossover(individual.x.copy(), v_g1, CR)           # TODO: Individual es x, antes era x_r1
-        Individual.check_lower_and_upper_limit(u_g1)
+        # Individual.check_lower_and_upper_limit(u_g1)
         # Mutate with gaussian distribution
 
-        Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)
+        # Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)     # TODO: Uncomment
 
         # STEP 2: EVALUATION
         # This function changes the value of y and computes the value of F(y)
