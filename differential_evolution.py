@@ -5,7 +5,7 @@ import zdt3
 import Individual
 
 
-def differential_evolution(population, z, F, CR, sigma):
+def differential_evolution(population, z, F, CR, sigma, PR):
     # TODO: Add second mutation
     for individual in population:
         # STEP 1: REPRODUCTION
@@ -25,6 +25,7 @@ def differential_evolution(population, z, F, CR, sigma):
         x_r2 = selected_neighbors[1].x.copy()
         x_r3 = selected_neighbors[2].x.copy()
 
+        # TODO: APPLY GAUSSIAN MUTATION BEFORE
         # MUTATION Generate mutant vector
         v_g1 = x_r1 + F * (x_r2 - x_r3)
         # Check lower and upper value
@@ -35,10 +36,11 @@ def differential_evolution(population, z, F, CR, sigma):
 
         # generate y
         # Check lower and upper value
-        u_g1 = generate_crossover(x_r1, v_g1, CR)
+        u_g1 = generate_crossover(individual.x.copy(), v_g1, CR)           # TODO: Individual es x, antes era x_r1
         Individual.check_lower_and_upper_limit(u_g1)
         # Mutate with gaussian distribution
-        Individual.mutate_with_gaussian_distribution(u_g1, sigma)
+
+        Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)
 
         # STEP 2: EVALUATION
         # This function changes the value of y and computes the value of F(y)
@@ -53,6 +55,10 @@ def differential_evolution(population, z, F, CR, sigma):
     # STEP 4: UPDATE NEIGHBORS
     for individual in population:
         y = individual.y.copy()
+
+        # TODO: After (do not compare with neighbors)
+        # individual.compare_with_vector(y, z)
+        # TODO: Before (compare with all neighbors)
         neighbors_of_individual = individual.get_neighbors_of_individual(population)
         # Para cada vecino,  comprobar si g es mejor, en caso afirmativo, reemplazar x por y
         for single_neighbor in neighbors_of_individual:

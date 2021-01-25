@@ -69,7 +69,9 @@ def check_lower_and_upper_limit(vector):
             vector[i] = 1.0
 
 
-def mutate_with_gaussian_distribution(vector_to_mutate, sigma):
+def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
     for i in range(vector_to_mutate.shape[0]):
-        vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
+        random_value = random()
+        if random_value <= PR:
+            vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
     check_lower_and_upper_limit(vector_to_mutate)

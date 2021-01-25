@@ -23,6 +23,7 @@ def generate_lambdas(N):
 def initialize_population(N, n, T):
     population = []
     lambdas = generate_lambdas(N)
+    print(lambdas)
 
     # z vector
     z = np.zeros((2,))

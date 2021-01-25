@@ -6,20 +6,23 @@ import inicialization
 import differential_evolution
 
 # HYPERPARAMETERS:
-N = 40         # Population size
-T = 8          # Neighborhood size
-G = 100         # Number of generations
+N = 100         # Population size
+T = 15          # Neighborhood size
+G = 1000        # Number of generations
 n = 30          # Number of dimensions
 
 # DE hyperparameters
-F = np.array([0.6])
+F = np.array([0.5])
 CR = 0.5
 
 # Gaussian hyperparameters
-sigma = 0.1
+PR = 0.05
+
+# Gaussian hyperparameters
+sigma = 0.05
 
 # Seed random number generator
-# seed(1)     # TODO: Change
+# seed(0)     # TODO: Change
 
 # Paths
 dat = 'PF.dat'
@@ -38,31 +41,31 @@ population, z = inicialization.initialize_population(N, n, T)
 # TODO: Update Z
 i = 0
 while i < G:
-    print(F)
+    # print(F)
     # if i % 50 == 0:
     #     print(i)
-    if i % 100 == 0:
+    if i % 10 == 0:
         f_1, f_2 = zdt3.get_representation(population, N)
         # PLOT
         plt.title('Generation {}'.format(i))
-        plt.plot(f_1, f_2, '.', color='b')
-        plt.plot(pf_x, pf_y, '.', color='r')
+        plt.scatter(f_1, f_2, color='b', s=0.8)
+        plt.scatter(pf_x, pf_y, color='r', s=0.8)
         plt.plot(z[0], z[1], '*', color='g')
         plt.show()
 
-    differential_evolution.differential_evolution(population, z, F, CR, sigma)
+    differential_evolution.differential_evolution(population, z, F, CR, sigma, PR)
 
     # DECAY (OPTIONAL)
-    if (i % 50 == 0) and (F >= 0.2):
-        F = F - 0.05
+    # if (i % 50 == 0) and (F >= 0.2):
+    #     F = F - 0.05
     # if (i% 20 == 0) and (CR >= 0.4):
     #     CR = CR - 0.1
     i = i+1
 
 plt.title('Final Generation')
-plt.plot(f_1, f_2, '.', color='b')
-plt.plot(pf_x, pf_y, '.', color='r')
-plt.plot(z[0], z[1], '*', color='g')
+plt.scatter(f_1, f_2, color='b', s=0.8)
+plt.scatter(pf_x, pf_y, color='r', s=0.8)
+plt.plot(z[0], z[1], color='g')
 plt.show()
 # for element in population:
 #     print(element)

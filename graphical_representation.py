@@ -17,6 +17,18 @@ paths = [
     'zdt3_nsgaii/4000/P40G100/zdt3_final_popp40g100_seed09.out'
          ]
 
+# paths = [
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed01.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed02.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed03.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed04.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed05.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed06.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed07.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed08.out',
+#     'zdt3_nsgaii/10000/P200G50/zdt3_final_popp200g50_seed09.out'
+#          ]
+
 
 # Get Pareto Front
 pf_x, pf_y = zdt3.get_pf(dat)
@@ -34,7 +46,7 @@ fig.suptitle('Comparison')
 
 point_size = 0.3
 
-k=0
+k = 0
 for i in range(3):
     for j in range(3):
         axs[i, j].scatter(pf_x, pf_y, color='r', s=point_size)
