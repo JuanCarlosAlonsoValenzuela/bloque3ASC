@@ -22,7 +22,7 @@ def main_class():
     sigma = 0.05
 
     # Paths
-    dat = 'PF.dat'
+    dat = 'PF_zdt3.dat'
 
     # Get Pareto Front
     pf_x, pf_y = zdt3.get_pf(dat)
