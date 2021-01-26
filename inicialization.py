@@ -46,16 +46,12 @@ def initialize_population(N, n, T):
 
         fx = zdt3.zdt3(individual.x)
         # Update z
-        if math.isnan(z[0]) or fx[0] < z[0]:
+        if math.isnan(z[0]) or fx[0] <= z[0]:
             z[0] = fx[0]
 
-        if math.isnan(z[1]) or fx[1] < z[1]:
+        if math.isnan(z[1]) or fx[1] <= z[1]:
             z[1] = fx[1]
 
         population.append(individual)
-
-    # Initialize gx TODO: DELETE
-    # for individual in population:
-    #     individual.initialize_g(z)
 
     return population, z
