@@ -1,9 +1,7 @@
 import numpy as np
 from random import random
 from random import randint
-import zdt3
-import Individual
-import matplotlib.pyplot as plt
+from zdt3.zdt3 import Individual
 
 
 def differential_evolution(population, z, F, CR, sigma, PR):

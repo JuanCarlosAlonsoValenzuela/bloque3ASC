@@ -1,7 +1,7 @@
 import numpy as np
-from Individual import Individual
+from zdt3.zdt3 import Individual
 import math
-import zdt3
+from zdt3 import zdt3
 
 
 # Vectores peso (lambda)

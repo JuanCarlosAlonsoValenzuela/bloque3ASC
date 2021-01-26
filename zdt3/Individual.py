@@ -1,6 +1,6 @@
 import numpy as np
 from random import random
-import zdt3
+from zdt3 import zdt3
 
 
 class Individual:

@@ -1,12 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from random import seed
-import zdt3
-import inicialization
-import differential_evolution
-import Individual
-
-
+from zdt3.zdt3 import differential_evolution, Individual, inicialization, zdt3
 
 
 def main_class():

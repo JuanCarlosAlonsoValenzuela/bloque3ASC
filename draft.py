@@ -1,8 +1,4 @@
-import numpy as np
-import zdt3
-import matplotlib.pyplot as plt
-from random import random
-import inicialization
+from zdt3.zdt3 import inicialization, zdt3
 
 # x = np.array([
 # 	8.398878e-01,	3.404545e-04,	3.871110e-03,	3.672765e-02,	1.625110e-01,	3.652249e-03, 	1.181743e-03,	7.603230e-02,
