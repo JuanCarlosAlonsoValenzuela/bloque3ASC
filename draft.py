@@ -2,6 +2,7 @@ import numpy as np
 import zdt3
 import matplotlib.pyplot as plt
 from random import random
+import inicialization
 
 # x = np.array([
 # 	8.398878e-01,	3.404545e-04,	3.871110e-03,	3.672765e-02,	1.625110e-01,	3.652249e-03, 	1.181743e-03,	7.603230e-02,
@@ -12,14 +13,8 @@ from random import random
 #
 # fx = zdt3.zdt3(x)
 # print(fx)
-
-point1 = [0.0, 0.0]
-point2 = [1.0, 0.0]
-x_values = [point1[0], point2[0]]
-y_values = [point1[1], point2[1]]
-
-plt.plot(x_values, y_values)
-plt.show()
+population, z = inicialization.initialize_population(30, 30, 5)
+zdt3.get_representation_of_all_weights(population)
 # for i in range(30):
 #     value = random()
 #     if value <= (1.0/30.0):
