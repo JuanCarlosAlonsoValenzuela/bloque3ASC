@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from zdt3 import zdt3
+from zdt3 import zdt3_utils
 import numpy as np
 
 # Paths
@@ -31,7 +31,7 @@ paths = [
 
 
 # Get Pareto Front
-pf_x, pf_y = zdt3.get_pf(dat)
+pf_x, pf_y = zdt3_utils.get_pf(dat)
 
 
 def get_nsgaii(csv_path):

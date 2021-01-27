@@ -1,7 +1,7 @@
 import numpy as np
-from zdt3.zdt3 import Individual
+from zdt3.Individual import Individual
 import math
-from zdt3 import zdt3
+from zdt3 import zdt3_utils
 
 
 # Vectores peso (lambda)
@@ -44,7 +44,7 @@ def initialize_population(N, n, T):
         # Create new individual
         individual = Individual(N, n,lambda_vector, t_neighbors)
 
-        fx = zdt3.zdt3(individual.x)
+        fx = zdt3_utils.zdt3(individual.x)
         # Update z
         if math.isnan(z[0]) or fx[0] <= z[0]:
             z[0] = fx[0]

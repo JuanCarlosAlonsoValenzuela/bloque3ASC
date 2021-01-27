@@ -1,6 +1,6 @@
 import numpy as np
 from random import random
-from zdt3 import zdt3
+from zdt3 import zdt3_utils
 
 
 class Individual:
@@ -21,7 +21,7 @@ class Individual:
 
     def add_and_evaluate_y(self, y_vector):
         self.y = y_vector
-        return zdt3.zdt3(y_vector)
+        return zdt3_utils.zdt3(y_vector)
 
     def get_neighbors_of_individual(self, population):
         neighbors_res = []
@@ -31,15 +31,15 @@ class Individual:
         return neighbors_res
 
     def compare_with_vector(self, vector, z):
-        new_f = zdt3.zdt3(vector)
+        new_f = zdt3_utils.zdt3(vector)
 
-        if new_f[0] <= z[0]:
-            z[0] = new_f[0].copy()
-        if new_f[1] <= z[1]:
-            z[1] = new_f[1].copy()
+        # if new_f[0] <= z[0]:
+        #     z[0] = new_f[0].copy()
+        # if new_f[1] <= z[1]:
+        #     z[1] = new_f[1].copy()
 
         new_g = compute_g(new_f, self.lambda_vector, z)
-        old_f = zdt3.zdt3(self.x)
+        old_f = zdt3_utils.zdt3(self.x)
         old_g = compute_g(old_f, self.lambda_vector, z)
         # Update x (and derives) if g<self.gx
         if new_g <= old_g:      # TODO: is <=, not <
@@ -48,7 +48,7 @@ class Individual:
     def __str__(self):
         r = 'x: {} \n' \
             'f: {} \n' \
-            'lambda: {}'.format(self.x, zdt3.zdt3(self.x), self.lambda_vector)
+            'lambda: {}'.format(self.x, zdt3_utils.zdt3(self.x), self.lambda_vector)
         return r
 
 
@@ -68,11 +68,15 @@ def check_lower_and_upper_limit(vector):
 
 
 def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
+
+    # Only x_1
     random_value = random()
     if random_value <= PR:
         vector_to_mutate[0] = vector_to_mutate[0] + np.random.normal(0.0, sigma)
-    # for i in range(vector_to_mutate.shape[0]):
-    #     random_value = random()
-    #     if random_value <= PR:
-    #         vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
+
+    # All the values of x
+    for i in range(vector_to_mutate.shape[0]):
+        random_value = random()
+        if random_value <= PR:
+            vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
     check_lower_and_upper_limit(vector_to_mutate)

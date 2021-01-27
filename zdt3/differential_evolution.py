@@ -1,7 +1,8 @@
 import numpy as np
 from random import random
 from random import randint
-from zdt3.zdt3 import Individual
+import zdt3.Individual as Individual
+import zdt3.zdt3_utils as zdt3_utils
 
 
 def differential_evolution(population, z, F, CR, sigma, PR):
@@ -41,12 +42,12 @@ def differential_evolution(population, z, F, CR, sigma, PR):
         u_g1 = generate_crossover(individual.x.copy(), v_g1, CR)           # TODO: Individual es x, antes era x_r1
         Individual.check_lower_and_upper_limit(u_g1)
         # Mutate with gaussian distribution
-        Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)     # TODO: Uncomment
+        # Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)     # TODO: Uncomment
 
-        if i >= 25:
-            print(i)
-            print(u_g1[0])
-        i = i + 1
+        # if i >= 25:
+        #     print(i)
+        #     print(u_g1[0])
+        # i = i + 1
 
         # STEP 2: EVALUATION
         # This function changes the value of y and computes the value of F(y)
@@ -63,13 +64,9 @@ def differential_evolution(population, z, F, CR, sigma, PR):
             z[1] = fy[1].copy()
 
     # STEP 4: UPDATE NEIGHBORS
-    i = 0
-    for individual in population:
+    # TODO: This part used to be a for loop
+    # for individual in population:
         y = individual.y.copy()
-
-        # if i >= 25:
-        #     print(i)
-        # i= i + 1
 
 
         # print('Lambda vector of individual: {}'.format(individual.lambda_vector))
@@ -84,8 +81,6 @@ def differential_evolution(population, z, F, CR, sigma, PR):
             # Updates the value of x of the neighbor if new_g < old_g
             single_neighbor.compare_with_vector(y, z)
 
-    # TODO: Second mutation (gauss)
-    # TODO: Compare with neighbors (G)
 
 
 def generate_crossover(x, v, CR):
