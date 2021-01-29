@@ -16,6 +16,7 @@ def sgn(sgn_input):
     else:
         return -1.0
 
+
 # Compute cf6 and check limits
 def cf6(x):
     n = x.shape[0]
@@ -61,3 +62,15 @@ def cf6(x):
     constr[1] = x[3] - 0.8*x[0]*math.sin(6.0*x[0]*math.pi+4.0*math.pi/n) - sgn(0.25*math.sqrt(1.0-x[0]) - 0.5*(1.0-x[0]))*math.sqrt(abs(0.25*math.sqrt(1.0-x[0])-0.5*(1.0-x[0])))
 
     return out, constr
+
+
+def get_representation(population, N):
+    f_1 = np.zeros([N, 1])  # F1 (phenotype)
+    f_2 = np.zeros([N, 1])  # F2 (phenotype)
+    for i in range(N):
+        individual = population[i]
+        fx, constrx = cf6(individual.x)
+        f_1[i] = fx[0]
+        f_2[i] = fx[1]
+
+    return f_1, f_2

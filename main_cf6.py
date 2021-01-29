@@ -1,28 +1,49 @@
 import numpy as np
 import cf6_utils
-import math
-import cf6_utils
+import differential_evolution
+import matplotlib.pyplot as plt
+import inicialization
 
+
+# HYPERPARAMETERS
+N = 40         # Population size
+T = 5          # Neighborhood size
+G = 40          # Number of generations
+n = 30          # Number of dimensions
+
+# DE hyperparameters
+F = np.array([0.5])
+CR = 0.5
+
+# Paths
 dat = 'PF/PF_cf6.dat'
-
 
 # Get Pareto Front
 pf_x, pf_y = cf6_utils.get_pf(dat)
+
+# Gaussian hyperparameters
+PR = 0.1
+sigma = 0.05
+
+# Get Pareto Front
+pf_x, pf_y = cf6_utils.get_pf(dat)
+
+##########################################################################
+
+# Initial population and z
+# sor stands for separation of objectives and restrictions
+population, z = inicialization.initialize_population_cf6_sor(N, n, T)
+f_1, f_2 = cf6_utils.get_representation(population, N)
+
+# Representation of initial population
+plt.title('Initial generation')
+plt.plot(f_1, f_2, '.', color='b', label='Initial population')
+plt.plot(pf_x, pf_y, '.', color='r', label='Pareto Front')
+plt.plot(z[0], z[1], '*', color='g', label = 'z')
+plt.show()
 
 # plt.scatter(pf_x, pf_y, s=0.8, color='red')
 # plt.show()
 
 
 # Recibe una x y devuelve el resultado y las restricciones
-
-x = np.array([3.307646e-04,	8.047906e-03,	2.621420e-02,	8.173679e-02,	-1.962023e-03,	2.089632e-02,	3.748047e-02,	1.954840e-02,	6.601718e-03,	2.614146e-02,	-8.654628e-02,	1.739586e-01,	3.176427e-02,	6.292900e-02,	-2.243408e-02,	-7.862677e-02])
-
-
-
-# TODO: Declarar valores mínimos y máximos
-n = x.shape[0]
-
-out, constr = cf6_utils.cf6(x)
-
-print(out)
-print(constr)

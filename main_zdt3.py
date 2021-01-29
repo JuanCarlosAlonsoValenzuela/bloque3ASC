@@ -5,7 +5,7 @@ import differential_evolution
 import inicialization
 
 
-def main_class():
+def main_class_zdt3():
     # HYPERPARAMETERS:
     N = 100         # Population size
     T = 15          # Neighborhood size
@@ -18,8 +18,6 @@ def main_class():
 
     # Gaussian hyperparameters
     PR = 0.1
-
-    # Gaussian hyperparameters
     sigma = 0.05
 
     # Paths
@@ -30,11 +28,11 @@ def main_class():
 
     ##########################################################################
     # Initial population and z
-    population, z = inicialization.initialize_population(N, n, T)
+    population, z = inicialization.initialize_population_zdt3(N, n, T)
     f_1, f_2 = zdt3_utils.get_representation(population, N)
 
     plt.title('Generation {}'.format(0))
-    plt.plot(f_1, f_2, '.', color='b', label='DE with Gaussian mutation')
+    plt.plot(f_1, f_2, '.', color='b', label='Initial population')
     plt.plot(pf_x, pf_y, '.', color='r', label='Pareto Front')
     plt.plot(z[0], z[1], '*', color='g', label = 'z')
     plt.show()
@@ -65,4 +63,4 @@ def main_class():
 
 
 # Seed random number generator
-main_class()
+main_class_zdt3()
