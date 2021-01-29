@@ -72,7 +72,6 @@ def generate_crossover(x, v, CR):
 
 
 def differential_evolution_cf6(population, z, F, CR, sigma, PR):
-    i = 0
     for individual_1 in population:
         # STEP 1: REPRODUCTION
         # Select 3 random neighbors (lambdas)
@@ -102,12 +101,9 @@ def differential_evolution_cf6(population, z, F, CR, sigma, PR):
         Individual.check_lower_and_upper_limit_cf6(u_g1)
 
         # Mutate with gaussian distribution (and check limits)
-        # TODO: Change upper and lower limits
         # Limits
         # i = 0 -->     min= 0.0,   max=1.0
         # i > 0 -->     min= -2.0,  max=2.0
-
-        # TODO: Uncomment
         Individual.mutate_with_gaussian_distribution_cf6(u_g1, sigma, PR)
 
         # STEP 2: EVALUATION
@@ -115,7 +111,6 @@ def differential_evolution_cf6(population, z, F, CR, sigma, PR):
         fy, constry = individual_1.add_and_evaluate_y_cf6(u_g1.copy())
 
         # STEP 3: UPDATE Z
-        # TODO: Consider restrictions?
         if fy[0] <= z[0]:
             z[0] = fy[0].copy()
         if fy[1] <= z[1]:
@@ -128,7 +123,7 @@ def differential_evolution_cf6(population, z, F, CR, sigma, PR):
         # Compare with neighbors
         neighbors_of_individual = candidate.get_neighbors_of_individual(population)
         for single_neighbor in neighbors_of_individual:
-            # TODO: Add restrictions
+            # Compare with neighbor (considering Separation of constraints and objectives)
             single_neighbor.compare_with_vector_cf6(y.copy(), z)
 
     return population, z

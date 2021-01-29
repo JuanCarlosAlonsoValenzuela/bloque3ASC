@@ -9,16 +9,40 @@ import graphical_representation_utils
 # Paths
 dat = 'PF/PF_cf6.dat'
 
+# paths = [
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed01.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed02.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed03.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed04.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed05.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed06.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed07.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed08.out',
+#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed09.out'
+# ]
+
+# paths = [
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed01.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed02.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed03.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed04.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed05.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed06.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed07.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed08.out',
+#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed09.out'
+# ]
+
 paths = [
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed01.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed02.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed03.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed04.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed05.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed06.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed07.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed08.out',
-    'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed09.out'
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed01.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed02.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed03.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed04.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed05.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed06.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed07.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed08.out',
+    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed09.out',
 ]
 
 # Get Pareto Front

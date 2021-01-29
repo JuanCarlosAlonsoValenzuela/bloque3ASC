@@ -53,9 +53,40 @@ class Individual:
         old_f, constr_old_f = cf6_utils.cf6(self.x)
         old_g = compute_g(old_f, self.lambda_vector, z)
 
-        # Update x (and derives) if new_g <= old_g
-        if new_g <= old_g:
-            self.update_x(vector)
+        # A constraint is violated if its value is beneath zero
+        old_feasible = (constr_old_f[0] >= 0.0) and (constr_old_f[1] >= 0.0)
+        new_feasible = (constr_new_f[0] >= 0.0) and (constr_new_f[1] >= 0.0)
+
+        # If both are feasible
+        if new_feasible and old_feasible:
+            if new_g <= old_g:      # Select the one with the greatest fitness
+                self.update_x(vector)
+
+        # If only one is feasible (This operation is equivalent to xor)
+        elif new_feasible != old_feasible:
+            if new_feasible:
+                self.update_x(vector)
+
+        # If none of the individuals is feasible, select the one that violates less restrictions
+        else:
+            old_sum = 0.0
+            new_sum = 0.0
+
+            if constr_old_f[0] < 0.0:
+                old_sum = old_sum + abs(constr_old_f[0])
+            if constr_old_f[1] < 0.0:
+                old_sum = old_sum + abs(constr_old_f[1])
+
+            if constr_new_f[0] < 0.0:
+                new_sum = new_sum + abs(constr_new_f[0])
+            if constr_new_f[1] < 0.0:
+                new_sum = new_sum + abs(constr_new_f[1])
+
+            if new_sum >= old_sum:
+                self.update_x(vector)
+
+
+
 
     def __str__(self):
         r = 'x: {} \n' \
