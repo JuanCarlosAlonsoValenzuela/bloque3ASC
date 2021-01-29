@@ -4,7 +4,7 @@ from zdt3 import zdt3_utils
 import numpy as np
 
 # Paths
-dat = 'PF_zdt3.dat'
+dat = 'zdt3/PF_zdt3.dat'
 paths = [
     'zdt3_nsgaii/4000/P40G100/zdt3_final_popp40g100_seed01.out',
     'zdt3_nsgaii/4000/P40G100/zdt3_final_popp40g100_seed02.out',

@@ -1,13 +1,15 @@
 import numpy as np
-from random import random
+import random
 from zdt3 import zdt3_utils
 
+# random.seed(0)
 
 class Individual:
     def __init__(self, N, n, lambda_vector, t_neighbors):
+
         x = np.zeros((n,))
         for j in range(n):
-            element = random()
+            element = random.random()
             x[j] = element
 
         # TODO CHANGE TO NUMPY SCALARS
@@ -70,13 +72,13 @@ def check_lower_and_upper_limit(vector):
 def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
 
     # Only x_1
-    random_value = random()
+    random_value = random.random()
     if random_value <= PR:
         vector_to_mutate[0] = vector_to_mutate[0] + np.random.normal(0.0, sigma)
 
     # All the values of x
     for i in range(vector_to_mutate.shape[0]):
-        random_value = random()
+        random_value = random.random()
         if random_value <= PR:
             vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
     check_lower_and_upper_limit(vector_to_mutate)
