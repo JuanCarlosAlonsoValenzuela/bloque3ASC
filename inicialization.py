@@ -48,6 +48,7 @@ def initialize_population_zdt3(N, n, T):
 
     return population, z
 
+
 def initialize_population_cf6_sor(N, n, T):
     population = []
     lambdas = generate_lambdas(N)

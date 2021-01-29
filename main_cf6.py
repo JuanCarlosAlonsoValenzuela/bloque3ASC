@@ -7,9 +7,9 @@ import inicialization
 
 # HYPERPARAMETERS
 N = 40         # Population size
-T = 5          # Neighborhood size
-G = 40          # Number of generations
-n = 30          # Number of dimensions
+T = 4          # Neighborhood size
+G = 100          # Number of generations
+n = 4          # Number of dimensions
 
 # DE hyperparameters
 F = np.array([0.5])
@@ -17,16 +17,18 @@ CR = 0.5
 
 # Paths
 dat = 'PF/PF_cf6.dat'
+dat_zdt3 = 'PF/PF_zdt3.dat'
 
 # Get Pareto Front
 pf_x, pf_y = cf6_utils.get_pf(dat)
 
 # Gaussian hyperparameters
-PR = 0.1
+PR = 0.3
 sigma = 0.05
 
 # Get Pareto Front
 pf_x, pf_y = cf6_utils.get_pf(dat)
+pf_x_zdt3, pf_y_zdt3 = cf6_utils.get_pf(dat_zdt3)
 
 ##########################################################################
 
@@ -39,11 +41,30 @@ f_1, f_2 = cf6_utils.get_representation(population, N)
 plt.title('Initial generation')
 plt.plot(f_1, f_2, '.', color='b', label='Initial population')
 plt.plot(pf_x, pf_y, '.', color='r', label='Pareto Front')
+plt.plot(pf_x_zdt3, pf_y_zdt3, '.', color='g', label='Pareto Front')
 plt.plot(z[0], z[1], '*', color='g', label = 'z')
 plt.show()
 
-# plt.scatter(pf_x, pf_y, s=0.8, color='red')
-# plt.show()
+i = 0
+while i < G:
+    # Apply differential evolution
+    population, z = differential_evolution.differential_evolution_cf6(population, z, F, CR, sigma, PR)
+    f_1, f_2 = cf6_utils.get_representation(population, N)
+    i = i + 1
 
+    if i%100 == 0:
+        plt.title('Generation {}'.format(i))
+        plt.plot(f_1, f_2, '.', color='b')
+        plt.scatter(pf_x, pf_y, color='r', s=0.8)
+        plt.plot(pf_x_zdt3, pf_y_zdt3, '.', color='g', label='Pareto Front')
+        plt.plot(z[0], z[1], '*', color='g')
+        plt.show()
+
+plt.title('Final Generation')
+plt.plot(f_1, f_2, '.', color='b')
+plt.plot(pf_x, pf_y, '.', color='r')
+plt.plot(pf_x_zdt3, pf_y_zdt3, '.', color='g', label='Pareto Front')
+plt.plot(z[0], z[1], '*', color='g')
+plt.show()
 
 # Recibe una x y devuelve el resultado y las restricciones

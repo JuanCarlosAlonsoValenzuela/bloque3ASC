@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import zdt3_utils
+import cf6_utils
 
 
 class Individual:
@@ -19,9 +20,13 @@ class Individual:
     def update_x(self, new_x):
         self.x = new_x
 
-    def add_and_evaluate_y(self, y_vector):
+    def add_and_evaluate_y_zdt3(self, y_vector):
         self.y = y_vector
         return zdt3_utils.zdt3(y_vector)
+
+    def add_and_evaluate_y_cf6(self, y_vector):
+        self.y = y_vector
+        return cf6_utils.cf6(y_vector)
 
     def get_neighbors_of_individual(self, population):
         neighbors_res = []
@@ -30,11 +35,22 @@ class Individual:
                 neighbors_res.append(neighbor_candidate)
         return neighbors_res
 
-    def compare_with_vector(self, vector, z):
+    def compare_with_vector_zdt3(self, vector, z):
         new_f = zdt3_utils.zdt3(vector)
         new_g = compute_g(new_f, self.lambda_vector, z)
 
         old_f = zdt3_utils.zdt3(self.x)
+        old_g = compute_g(old_f, self.lambda_vector, z)
+
+        # Update x (and derives) if new_g <= old_g
+        if new_g <= old_g:
+            self.update_x(vector)
+
+    def compare_with_vector_cf6(self, vector, z):
+        new_f, constr_new_f = cf6_utils.cf6(vector)
+        new_g = compute_g(new_f, self.lambda_vector, z)
+
+        old_f, constr_old_f = cf6_utils.cf6(self.x)
         old_g = compute_g(old_f, self.lambda_vector, z)
 
         # Update x (and derives) if new_g <= old_g
@@ -54,7 +70,7 @@ def compute_g(f, lambdas, z):
     return max(g_1, g_2)
 
 
-def check_lower_and_upper_limit(vector):
+def check_lower_and_upper_limit_zdt3(vector):
     for i in range(vector.shape[0]):
         if vector[i] < 0.0:
             vector[i] = 0.0
@@ -62,7 +78,25 @@ def check_lower_and_upper_limit(vector):
             vector[i] = 1.0
 
 
-def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
+def check_lower_and_upper_limit_cf6(vector):
+    # Limits
+    # i = 0 -->     min= 0.0,   max=1.0
+    # i > 0 -->     min= -2.0,  max=2.0
+    # Check limit of x[0]
+    if vector[0] < 0.0:
+        vector[0] = 0.0
+    if vector[0] > 1.0:
+        vector[0] = 1.0
+
+        # Check limit of the rest of elements
+    for i in range(1, vector.shape[0]):
+        if vector[i] > 2.0:
+            vector[i] = 2.0
+        if vector[i] < -2.0:
+            vector[i] = -2.0
+
+
+def mutate_with_gaussian_distribution_zdt3(vector_to_mutate, sigma, PR):
 
     # Only x_1
     random_value = random.random()
@@ -74,4 +108,19 @@ def mutate_with_gaussian_distribution(vector_to_mutate, sigma, PR):
         random_value = random.random()
         if random_value <= PR:
             vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
-    check_lower_and_upper_limit(vector_to_mutate)
+    check_lower_and_upper_limit_zdt3(vector_to_mutate)
+
+
+def mutate_with_gaussian_distribution_cf6(vector_to_mutate, sigma, PR):
+
+    # Only x_1
+    # random_value = random.random()
+    # if random_value <= PR:
+    #     vector_to_mutate[0] = vector_to_mutate[0] + np.random.normal(0.0, sigma)
+
+    # All the values of x
+    for i in range(vector_to_mutate.shape[0]):
+        random_value = random.random()
+        if random_value <= PR:
+            vector_to_mutate[i] = vector_to_mutate[i] + np.random.normal(0.0, sigma)
+    check_lower_and_upper_limit_cf6(vector_to_mutate)

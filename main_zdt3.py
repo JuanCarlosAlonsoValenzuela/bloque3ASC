@@ -9,7 +9,7 @@ def main_class_zdt3():
     # HYPERPARAMETERS:
     N = 100         # Population size
     T = 15          # Neighborhood size
-    G = 40          # Number of generations
+    G = 100          # Number of generations
     n = 30          # Number of dimensions
 
     # DE hyperparameters
@@ -41,7 +41,7 @@ def main_class_zdt3():
     while i < G:
 
         # Apply differential evolution
-        population, z = differential_evolution.differential_evolution(population, z, F, CR, sigma, PR)
+        population, z = differential_evolution.differential_evolution_zdt3(population, z, F, CR, sigma, PR)
 
         f_1, f_2 = zdt3_utils.get_representation(population, N)
 
