@@ -1,7 +1,7 @@
 import numpy as np
-from zdt3.Individual import Individual
+from Individual import Individual
 import math
-from zdt3 import zdt3_utils
+import zdt3_utils
 
 
 # Vectores peso (lambda)
@@ -16,21 +16,12 @@ def generate_lambdas(N):
         lambdas[i][1] = 1.0 - x
         x = x + increment
 
-    # i = 0
-    # while x <= 1.0:
-    #     #     # lambdas[0][i] = np.array([x, 1.0 - x])
-    #     #     lambdas[i][0] = x
-    #     #     lambdas[i][1] = 1.0 - x
-    #     #     x = x + increment
-    #     #     i = i + 1
-
     return lambdas
 
 
 def initialize_population(N, n, T):
     population = []
     lambdas = generate_lambdas(N)
-    print(lambdas)
 
     # z vector
     z = np.zeros((2,))
@@ -42,7 +33,7 @@ def initialize_population(N, n, T):
         t_neighbors = lambdas[np.argsort(dist)][:T]
 
         # Create new individual
-        individual = Individual(N, n,lambda_vector, t_neighbors)
+        individual = Individual(n,lambda_vector, t_neighbors)
 
         fx = zdt3_utils.zdt3(individual.x)
         # Update z

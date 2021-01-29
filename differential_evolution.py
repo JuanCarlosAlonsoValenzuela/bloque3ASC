@@ -1,13 +1,10 @@
 import numpy as np
 import random
 from random import randint
-import zdt3.Individual as Individual
-import zdt3.zdt3_utils as zdt3_utils
+import Individual as Individual
 
-# random.seed(0)
 
 def differential_evolution(population, z, F, CR, sigma, PR):
-    # TODO: Add second mutation
     i = 0
     for individual_1 in population:
         # STEP 1: REPRODUCTION
@@ -24,36 +21,20 @@ def differential_evolution(population, z, F, CR, sigma, PR):
 
         # Compute next generation
         x_r1 = selected_neighbors[0].x.copy()
-        # print(20*'-')
-        # print("Individual x: {}".format(individual.x.copy()))
-        # print("x_r1: {}".format(x_r1))
-        # print(20 * '-')
-
         x_r2 = selected_neighbors[1].x.copy()
         x_r3 = selected_neighbors[2].x.copy()
 
-        # if np.all(x_r1 == x_r2) and np.all(x_r1 == x_r3) and np.all(x_r2 == x_r3):
-        #     print('Son iguales en individuo: {}'.format(individual))
-
-        # TODO: APPLY GAUSSIAN MUTATION BEFORE
         # MUTATION Generate mutant vector
         v_g1 = x_r1 + F * (x_r2 - x_r3)
-        # Check lower and upper value
-        # Individual.check_lower_and_upper_limit(v_g1)
-
 
         # CROSSOVER to increase diversity
         # generate y
         # Check lower and upper value
-        u_g1 = generate_crossover(individual_1.x.copy(), v_g1, CR)           # TODO: Individual es x, antes era x_r1
+        u_g1 = generate_crossover(individual_1.x.copy(), v_g1, CR)
         Individual.check_lower_and_upper_limit(u_g1)
-        # Mutate with gaussian distribution
-        # Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)     # TODO: Uncomment
 
-        # if i >= 25:
-        #     print(i)
-        #     print(u_g1[0])
-        # i = i + 1
+        # Mutate with gaussian distribution
+        Individual.mutate_with_gaussian_distribution(u_g1, sigma, PR)
 
         # STEP 2: EVALUATION
         # This function changes the value of y and computes the value of F(y)
@@ -62,29 +43,16 @@ def differential_evolution(population, z, F, CR, sigma, PR):
         # STEP 3: UPDATE Z
         if fy[0] <= z[0]:
             z[0] = fy[0].copy()
-            # PLOT when lower
-            # print(individual)
-            # plt.plot(fy[0], fy[1], 'o', color='b')
-            # plt.show()
         if fy[1] <= z[1]:
             z[1] = fy[1].copy()
 
     # STEP 4: UPDATE NEIGHBORS
-    # TODO: This part used to be a for loop
     for candidate in population:
         y = candidate.y.copy()
 
-
-        # print('Lambda vector of individual: {}'.format(individual.lambda_vector))
-
-        # TODO: After (do not compare with neighbors)
-        # candidate.compare_with_vector(y, z)
-        # TODO: Before (compare with all neighbors)
+        # Compare with neighbors
         neighbors_of_individual = candidate.get_neighbors_of_individual(population)
-        # Para cada vecino,  comprobar si g es mejor, en caso afirmativo, reemplazar x por y
         for single_neighbor in neighbors_of_individual:
-            # print('Lambda vector of neighbor: {}'.format(single_neighbor.lambda_vector))
-            # Updates the value of x of the neighbor if new_g <= old_g
             single_neighbor.compare_with_vector(y.copy(), z)
 
     return population, z

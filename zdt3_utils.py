@@ -23,7 +23,7 @@ def zdt3(x):
     return out
 
 
-# get pareto front
+# get Pareto Front
 def get_pf(dat):
     df = pd.read_csv(dat, sep='\t', header=None)
     return df[0].to_numpy(), df[1].to_numpy()
@@ -43,22 +43,18 @@ def get_representation(population, N):
 
 
 def get_representation_of_weights(individual, z):
-    point1 = z # [0.0, 0.0]
+    point1 = z
     x_values = [point1[0], individual.lambda_vector[0] + point1[0]]
     y_values = [point1[1], individual.lambda_vector[1] + point1[1]]
 
     # Print lambda
     plt.plot(x_values, y_values, color='b', linewidth = 1)
-    # plt.xlim([0.0, 6.0])
-    # plt.ylim([0.0, 6.0])
 
     for neighbor in individual.neighbors:
         if neighbor[0] != individual.lambda_vector[0] and neighbor[1] != individual.lambda_vector[1]:
             x_values = [point1[0], neighbor[0] + point1[0]]
             y_values = [point1[1], neighbor[1] + point1[1]]
             plt.plot(x_values, y_values, color='g', linewidth = 1)
-
-    # plt.show()
 
 
 def get_representation_of_all_weights(population):

@@ -1,18 +1,16 @@
 import numpy as np
 import random
-from zdt3 import zdt3_utils
+import zdt3_utils
 
-# random.seed(0)
 
 class Individual:
-    def __init__(self, N, n, lambda_vector, t_neighbors):
+    def __init__(self, n, lambda_vector, t_neighbors):
 
         x = np.zeros((n,))
         for j in range(n):
             element = random.random()
             x[j] = element
 
-        # TODO CHANGE TO NUMPY SCALARS
         self.x = x                          # Individual of n dimensions (genotype)
         self.lambda_vector = lambda_vector  # lambda
         self.neighbors = t_neighbors        # B
@@ -34,17 +32,13 @@ class Individual:
 
     def compare_with_vector(self, vector, z):
         new_f = zdt3_utils.zdt3(vector)
-
-        # if new_f[0] <= z[0]:
-        #     z[0] = new_f[0].copy()
-        # if new_f[1] <= z[1]:
-        #     z[1] = new_f[1].copy()
-
         new_g = compute_g(new_f, self.lambda_vector, z)
+
         old_f = zdt3_utils.zdt3(self.x)
         old_g = compute_g(old_f, self.lambda_vector, z)
-        # Update x (and derives) if g<self.gx
-        if new_g <= old_g:      # TODO: is <=, not <
+
+        # Update x (and derives) if new_g <= old_g
+        if new_g <= old_g:
             self.update_x(vector)
 
     def __str__(self):
@@ -57,7 +51,6 @@ class Individual:
 def compute_g(f, lambdas, z):
     g_1 = lambdas[0] * abs(f[0] - z[0])
     g_2 = lambdas[1] * abs(f[1] - z[1])
-    # print(type(g_1))
     return max(g_1, g_2)
 
 

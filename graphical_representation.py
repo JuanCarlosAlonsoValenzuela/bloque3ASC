@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from zdt3 import zdt3_utils
+import zdt3_utils
 import numpy as np
 
 # Paths
