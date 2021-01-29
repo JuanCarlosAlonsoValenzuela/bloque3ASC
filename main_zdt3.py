@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import zdt3_utils as zdt3_utils
-import differential_evolution as differential_evolution
-import inicialization as inicialization
+import zdt3_utils
+import differential_evolution
+import inicialization
 
 
 def main_class():
