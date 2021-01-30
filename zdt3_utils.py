@@ -31,8 +31,8 @@ def get_pf(dat):
 
 # return representation of a population8
 def get_representation(population, N):
-    f_1 = np.zeros([N, 1])  # F1 (phenotype)
-    f_2 = np.zeros([N, 1])  # F2 (phenotype)
+    f_1 = np.zeros([N])  # F1 (phenotype)
+    f_2 = np.zeros([N])  # F2 (phenotype)
     for i in range(N):
         individual = population[i]
         fx = zdt3(individual.x)
