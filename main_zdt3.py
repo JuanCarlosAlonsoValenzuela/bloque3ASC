@@ -12,9 +12,9 @@ pd.set_option('precision', 8)
 
 def main_class_zdt3(seed_number):
     # HYPERPARAMETERS:
-    N = 100         # Population size
-    T = 15          # Neighborhood size
-    G = 100          # Number of generations
+    N = 200         # Population size
+    T = 25          # Neighborhood size
+    G = 50          # Number of generations
     n = 30          # Number of dimensions
 
     # DE hyperparameters
@@ -42,7 +42,7 @@ def main_class_zdt3(seed_number):
     plt.title('Generation {}'.format(0))
     plt.plot(f_1, f_2, '.', color='b', label='Initial population')
     plt.plot(pf_x, pf_y, '.', color='r', label='Pareto Front')
-    plt.plot(z[0], z[1], '*', color='g', label = 'z')
+    plt.plot(z[0], z[1], '*', color='g', label='z')
     plt.show()
 
     i = 0
@@ -62,13 +62,13 @@ def main_class_zdt3(seed_number):
         # Concat previous generations with current one
         total_pop = pd.concat([total_pop, current_gen], axis=0, ignore_index=True)
 
-        if i % 100 == 0:
-            plt.title('Generation {}'.format(i))
-            plt.plot(f_1, f_2, '.', color='b')
-            plt.scatter(pf_x, pf_y, color='r', s=0.8)
-            plt.xlim([0.0, 1.0])
-            plt.plot(z[0], z[1], '*', color='g')
-            plt.show()
+        # if i % 100 == 0:
+        #     plt.title('Generation {}'.format(i))
+        #     plt.plot(f_1, f_2, '.', color='b')
+        #     plt.scatter(pf_x, pf_y, color='r', s=0.8)
+        #     plt.xlim([0.0, 1.0])
+        #     plt.plot(z[0], z[1], '*', color='g')
+        #     plt.show()
 
     # Write final generation
     n_eval = N*G
@@ -88,18 +88,13 @@ def main_class_zdt3(seed_number):
     total_pop.to_csv(total_pop_path, sep='\t', header=False, index=False)
     final_pop.to_csv(final_path, sep='\t', header=False, index=False)
 
-    print(total_pop)
-    print('##################')
-    print(final_pop)
-
     plt.title('Final Generation')
-    plt.scatter(f_1, f_2, color='b', s=0.8)
+    plt.plot(f_1, f_2, '.',color='b')
     plt.scatter(pf_x, pf_y, color='r', s=0.8)
     plt.plot(z[0], z[1], '*', color='g')
     plt.show()
 
 
 # Seed random number generator
-# for seed_value in range(1, 11):
-#     main_class_zdt3(seed_value)
-main_class_zdt3(1)
+for seed_value in range(1, 11):
+    main_class_zdt3(seed_value)
