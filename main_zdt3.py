@@ -96,5 +96,5 @@ def main_class_zdt3(seed_number):
 
 
 # Seed random number generator
-for seed_value in range(1, 11):
-    main_class_zdt3(seed_value)
+# for seed_value in range(1, 11):
+#     main_class_zdt3(seed_value)
