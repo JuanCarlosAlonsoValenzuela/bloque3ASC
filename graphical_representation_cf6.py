@@ -9,57 +9,41 @@ import graphical_representation_utils
 # Paths
 dat = 'PF/PF_cf6.dat'
 
-# paths = [
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed01.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed02.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed03.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed04.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed05.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed06.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed07.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed08.out',
-#     'cf6_4d_results/4000/P40G100/cf6_4d_final_popp40g100_seed09.out'
-# ]
+N = 40
+G = 100
+n = 4
+n_eval = N*G
 
-# paths = [
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed01.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed02.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed03.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed04.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed05.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed06.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed07.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed08.out',
-#     'cf6_16d_results/4000/P40G100/cf6_16d_final_popp40g100_seed09.out'
-# ]
+paths_nsgaii = []
+paths_de = []
 
-paths = [
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed01.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed02.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed03.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed04.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed05.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed06.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed07.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed08.out',
-    'cf6_16d_results/10000/P40G250/cf6_16d_final_popp40g250_seed09.out',
-]
+for i in range(1, 10):
+    new_path_nsgaii = 'cf6_{}d_results/{}/P{}G{}/cf6_{}d_final_popp{}g{}_seed0{}.out'.format(n, n_eval, N, G, n, N, G, i)
+    paths_nsgaii.append(new_path_nsgaii)
+
+    new_path_de = 'cf6_{}d_de_results/{}/P{}G{}/cf6_{}d_final_popp{}g{}_seed{}.out'.format(n, n_eval, N, G, n, N, G, i)
+
+    paths_de.append(new_path_de)
 
 # Get Pareto Front
 pf_x, pf_y = cf6_utils.get_pf(dat)
 
 fig, axs = plt.subplots(3, 3)
-fig.suptitle('Comparison')
+fig.suptitle('Comparison of CF6 with {} dimensions for N={} and G={} ({} EVALUATIONS)'.format(n, N, G, n_eval))
 
 point_size = 0.3
 k = 0
 for i in range(3):
     for j in range(3):
-        axs[i, j].scatter(pf_x, pf_y, color='r', s=point_size)
-        nsgaii = graphical_representation_utils.get_nsgaii(paths[k])
-        axs[i, j].scatter(nsgaii[0], nsgaii[1], color='b', s=point_size)
+        axs[i, j].scatter(pf_x, pf_y, color='r', s=point_size, label='PF')
+        nsgaii = graphical_representation_utils.get_nsgaii(paths_nsgaii[k])
+        de = graphical_representation_utils.get_nsgaii(paths_de[k])
+        axs[i, j].plot(nsgaii[0], nsgaii[1], '.', color='b', label='NSGAII')
+        axs[i, j].plot(de[0], de[1], '.',color='g', label='DE')
         axs[i, j].set_title('Seed {}'.format(k+1))
-        # axs[i, j].set_ylim([-0.8, 1.3])
+        axs[i, j].set_ylim([0.0, 1.2])
+        axs[i, j].set_xlim([0.0, 1.2])
+        axs[i, j].legend()
         k = k + 1
 
 for ax in fig.get_axes():

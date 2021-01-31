@@ -16,8 +16,8 @@ paths_nsgaii = []
 paths_de = []
 
 for i in range(1, 10):
-    new_path_ngaii = 'zdt3_nsgaii_results/{}/P{}G{}/zdt3_final_popp{}g{}_seed0{}.out'.format(n_eval, N, G, N, G, i)
-    paths_nsgaii.append(new_path_ngaii)
+    new_path_nsgaii = 'zdt3_nsgaii_results/{}/P{}G{}/zdt3_final_popp{}g{}_seed0{}.out'.format(n_eval, N, G, N, G, i)
+    paths_nsgaii.append(new_path_nsgaii)
 
     new_path_de = 'zdt3_de_results/{}/P{}G{}/zdt3_final_popp{}g{}_seed{}.out'.format(n_eval, N, G, N, G, i)
     paths_de.append(new_path_de)
