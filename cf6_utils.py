@@ -65,12 +65,16 @@ def cf6(x):
 
 
 def get_representation(population, N):
-    f_1 = np.zeros([N, 1])  # F1 (phenotype)
-    f_2 = np.zeros([N, 1])  # F2 (phenotype)
+    f_1 = np.zeros([N])  # F1 (phenotype)
+    f_2 = np.zeros([N])  # F2 (phenotype)
+    constr_1 = np.zeros([N])
+    constr_2 = np.zeros([N])
     for i in range(N):
         individual = population[i]
         fx, constrx = cf6(individual.x)
         f_1[i] = fx[0]
         f_2[i] = fx[1]
+        constr_1[i] = constrx[0]
+        constr_2[i] = constrx[1]
 
-    return f_1, f_2
+    return f_1, f_2, constr_1, constr_2
