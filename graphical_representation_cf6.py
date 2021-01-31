@@ -9,9 +9,9 @@ import graphical_representation_utils
 # Paths
 dat = 'PF/PF_cf6.dat'
 
-N = 40
-G = 100
-n = 4
+N = 200
+G = 50
+n = 16
 n_eval = N*G
 
 paths_nsgaii = []
