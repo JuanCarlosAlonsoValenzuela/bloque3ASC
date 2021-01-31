@@ -4,7 +4,7 @@ import zdt3_utils
 import numpy as np
 import graphical_representation_utils
 
-N = 80
+N = 200
 G = 50
 n_eval = N*G
 
