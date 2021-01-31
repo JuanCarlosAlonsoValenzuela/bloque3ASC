@@ -25,7 +25,7 @@ res.append(line_2)
 line_3 = 'cp hvref.out ./tmp_zdt3p{}g{}/hvref{}.out'.format(N, G, hvref_number)
 res.append(line_3)
 
-line_4 = 'cp ./tmp_zdt3p{}g{}/hvref{}.out >> /tmp_zdt3p{}g{}/hvrefp{}g{}.out'.format(N, G, hvref_number, N, G, N, G)
+line_4 = 'cp ./tmp_zdt3p{}g{}/hvref{}.out ./tmp_zdt3p{}g{}/hvrefp{}g{}.out'.format(N, G, hvref_number, N, G, N, G)
 res.append(line_4)
 
 while seed_number < 10:

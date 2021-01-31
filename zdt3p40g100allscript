@@ -1,7 +1,7 @@
 cp ./zdt3_de_results/4000/P40G100/zdt3_all_popmp40g100_seed1.out zdt3_all_popmp40g100.out
 ./metrics < zdt3p40g100stall.in
 cp hvref.out ./tmp_zdt3p40g100/hvref1.out
-cp ./tmp_zdt3p40g100/hvref1.out >> /tmp_zdt3p40g100/hvrefp40g100.out
+cp ./tmp_zdt3p40g100/hvref1.out ./tmp_zdt3p40g100/hvrefp40g100.out
 cp ./zdt3_de_results/4000/P40G100/zdt3_all_popmp40g100_seed2.out zdt3_all_popmp40g100.out
 ./metrics < zdt3p40g100stall.in
 cp hvref.out ./tmp_zdt3p40g100/hvref2.out
