@@ -23,7 +23,7 @@ res.append(last_line)
 for element in res:
     print(element)
 
-with open('plot_zdt3p{}g{}'.format(N, G), 'w') as f:
+with open('plot_hv_zdt3p{}g{}'.format(N, G), 'w') as f:
     for item in res:
         f.write(item + '\n')
 
