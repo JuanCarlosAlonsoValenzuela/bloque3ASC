@@ -27,7 +27,6 @@ while seed_number < 10:
     line_2 = 'cp zdt3p{}g{}stallbasic.in zdt3p{}g{}stallref.in'.format(N, G, N, G)
     res.append(line_2)
 
-    # TODO: Modify HVREF NAME
     line_3 = 'cat ./tmp_zdt3p{}g{}/hvref.out >> zdt3p{}g{}stallref.in'.format(N, G, N, G)
     res.append(line_3)
 

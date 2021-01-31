@@ -58,7 +58,7 @@ while seed_number < 10:
     if seed_number == 10:
         seed_number = 99
 
-    line_1 = 'cp ./zdt3_nsgaii_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed0{}.out'.format(n_eval, N, G, N, G, seed_number)
+    line_1 = 'cp ./zdt3_nsgaii_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed0{}.out zdt3_all_popmp{}g{}.out'.format(n_eval, N, G, N, G, seed_number, N, G)
     res.append(line_1)
 
     line_2 = './metrics < zdt3p{}g{}stall.in'.format(N, G)
