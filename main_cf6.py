@@ -11,10 +11,10 @@ pd.set_option('precision', 8)
 
 def main_class_cf6(seed_number):
     # HYPERPARAMETERS
-    N = 40         # Population size
-    T = 10          # Neighborhood size
-    G = 100          # Number of generations
-    n = 4          # Number of dimensions
+    N = 200         # Population size
+    T = 25          # Neighborhood size
+    G = 50         # Number of generations
+    n = 16          # Number of dimensions
 
     # DE hyperparameters
     F = np.array([0.5])
@@ -100,4 +100,5 @@ def main_class_cf6(seed_number):
 
 
 # Recibe una x y devuelve el resultado y las restricciones
-main_class_cf6(1)
+# for seed_value in range(1, 11):
+#     main_class_cf6(seed_value)
