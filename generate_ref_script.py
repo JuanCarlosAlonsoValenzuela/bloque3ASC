@@ -37,7 +37,7 @@ while seed_number < 10:
     line_5 = 'cp hypervol.out ./tmp_zdt3p{}g{}/hypervol{}.out'.format(N, G, hypervol_number)
     res.append(line_5)
 
-    line_6 = 'cp spacing.out ./tmp_zdt3p{}g{}/spacing{}.out'.format(N, G, hypervol_number)
+    line_6 = 'cp spacing.out ./tmp_zdt3p{}g{}/spacing{}.out'.format(N, G, spacing_number)
     res.append(line_6)
 
 
@@ -52,7 +52,7 @@ while seed_number<10:
         seed_number = 99
 
     # TODO: 0 before seed
-    line_1 = 'cp ./zdt3_nsgaii_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed0{}.out'.format(n_eval, N, G, N, G, seed_number)
+    line_1 = 'cp ./zdt3_nsgaii_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed0{}.out zdt3_all_popmp{}g{}.out'.format(n_eval, N, G, N, G, seed_number, N, G)
     res.append(line_1)
 
     line_2 = 'cp zdt3p{}g{}stallbasic.in zdt3p{}g{}stallref.in'.format(N, G, N, G)
@@ -67,7 +67,7 @@ while seed_number<10:
     line_5 = 'cp hypervol.out ./tmp_zdt3p{}g{}/hypervol{}.out'.format(N, G, hypervol_number)
     res.append(line_5)
 
-    line_6 = 'cp spacing.out ./tmp_zdt3p{}g{}/spacing{}.out'.format(N, G, hypervol_number)
+    line_6 = 'cp spacing.out ./tmp_zdt3p{}g{}/spacing{}.out'.format(N, G, spacing_number)
     res.append(line_6)
 
 
