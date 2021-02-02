@@ -1,8 +1,8 @@
 import generate_stall_script
 
 # Params
-N = 40
-G = 100
+N = 100
+G = 40
 n_eval = N*G
 
 # Generate .in file
