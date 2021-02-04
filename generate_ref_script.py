@@ -2,8 +2,8 @@ import generate_stall_script
 
 
 # Params
-N = 200
-G = 50
+N = 100
+G = 100
 n_eval = N*G
 
 # Generate basic stall script
