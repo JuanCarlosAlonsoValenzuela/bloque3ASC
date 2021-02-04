@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-N = 200
-G = 50
+N = 40
+G = 100
 path1 = 'tmp_zdt3p{}g{}/cs1_{}.out'
 path2 = 'tmp_zdt3p{}g{}/cs2_{}.out'
 

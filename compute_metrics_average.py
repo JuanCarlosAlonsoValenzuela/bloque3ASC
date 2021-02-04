@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 
-N = 200
-G = 50
+N = 40
+G = 100
 
 path = 'tmp_zdt3p{}g{}/spacing{}.out'
 

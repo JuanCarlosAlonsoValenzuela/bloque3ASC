@@ -1,7 +1,7 @@
 import generate_stall_script
 
 # Params
-N = 100
+N = 40
 G = 100
 n_eval = N*G
 

@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-N = 100
-G = 40
+N = 40
+G = 100
 
 path1 = 'tmp_zdt3p{}g{}/cs1_{}.out'
 path2 = 'tmp_zdt3p{}g{}/cs2_{}.out'
