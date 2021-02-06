@@ -5,24 +5,25 @@ import matplotlib.patches as mpatches
 
 N = 40
 G = 100
-path = 'tmp_zdt3p{}g{}/spacing{}.out'
+d = 4
+path = 'tmp_cf6_{}dp{}g{}/spacing{}.out'
 
 
 for i in range(1, 11):
-    df = pd.read_csv(path.format(N, G, i), header=None, sep='\t')
+    df = pd.read_csv(path.format(d, N, G, i), header=None, sep='\t')
     array = df[1].to_numpy()
     plt.plot(array, '-', color='b', linewidth=1)
 
 
 for j in range(11, 21):
-    df = pd.read_csv(path.format(N, G, j), header=None, sep='\t')
+    df = pd.read_csv(path.format(d, N, G, j), header=None, sep='\t')
     array = df[1].to_numpy()
     plt.plot(array, '-', color='r', linewidth=1)
 
 red_patch = mpatches.Patch(color='red', label='nsgaii')
 blue_patch = mpatches.Patch(color='blue', label='de')
 
-plt.title("Spacing with N={} and G={}".format(N, G))
+plt.title("Hypervol with d={}, N={} and G={}".format(d, N, G))
 plt.legend(handles=[red_patch, blue_patch])
 plt.show()
 

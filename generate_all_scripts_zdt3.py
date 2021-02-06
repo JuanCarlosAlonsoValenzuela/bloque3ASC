@@ -2,12 +2,13 @@ import generate_stall_script
 
 
 # Params
-N = 40
-G = 100
+N = 100
+G = 40
+d = 16
 n_eval = N*G
 
 # Generate stall_script
-generate_stall_script.generate_stall(N, G)
+generate_stall_script.generate_stall(N, G, d)
 
 # Do not modify
 hvref_number = 1
@@ -16,32 +17,36 @@ res = []
 
 # Add DE commands
 # First lines (seed 1)
-line_1 = 'cp ./zdt3_de_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed{}.out zdt3_all_popmp{}g{}.out'.format(n_eval, N, G, N, G, seed_number, N, G)
+line_1 = 'cp ./cf6_{}d_de_results/{}/P{}G{}/cf6_{}d_all_popmp{}g{}_seed{}.out cf6_{}d_all_popmp{}g{}.out'\
+    .format(d, n_eval, N, G, d, N, G, seed_number, d, N, G)
 res.append(line_1)
 
-line_2 = './metrics < zdt3p{}g{}stall.in'.format(N, G)
+line_2 = './metrics < cf6_{}d_p{}g{}stall.in'.format(d, N, G)
 res.append(line_2)
 
-line_3 = 'cp hvref.out ./tmp_zdt3p{}g{}/hvref{}.out'.format(N, G, hvref_number)
+line_3 = 'cp hvref.out ./tmp_cf6_{}dp{}g{}/hvref{}.out'.format(d, N, G, hvref_number)
 res.append(line_3)
 
-line_4 = 'cp ./tmp_zdt3p{}g{}/hvref{}.out ./tmp_zdt3p{}g{}/hvrefp{}g{}.out'.format(N, G, hvref_number, N, G, N, G)
+line_4 = 'cp ./tmp_cf6_{}dp{}g{}/hvref{}.out ./tmp_cf6_{}dp{}g{}/hvrefp{}g{}.out'\
+    .format(d, N, G, hvref_number, d, N, G, N, G)
 res.append(line_4)
 
 while seed_number < 10:
     seed_number = seed_number + 1
     hvref_number = hvref_number + 1
 
-    line_1 = 'cp ./zdt3_de_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed{}.out zdt3_all_popmp{}g{}.out'.format(n_eval, N, G, N, G, seed_number, N, G)
+    line_1 = 'cp ./cf6_{}d_de_results/{}/P{}G{}/cf6_{}d_all_popmp{}g{}_seed{}.out cf6_{}d_all_popmp{}g{}.out'\
+        .format(d, n_eval, N, G, d, N, G, seed_number, d, N, G)
     res.append(line_1)
 
-    line_2 = './metrics < zdt3p{}g{}stall.in'.format(N, G)
+    line_2 = './metrics < cf6_{}d_p{}g{}stall.in'.format(d, N, G)
     res.append(line_2)
 
-    line_3 = 'cp hvref.out ./tmp_zdt3p{}g{}/hvref{}.out'.format(N, G, hvref_number)
+    line_3 = 'cp hvref.out ./tmp_cf6_{}dp{}g{}/hvref{}.out'.format(d, N, G, hvref_number)
     res.append(line_3)
 
-    line_4 = 'cat ./tmp_zdt3p{}g{}/hvref{}.out >> ./tmp_zdt3p{}g{}/hvrefp{}g{}.out'.format(N, G, hvref_number, N, G, N, G)
+    line_4 = 'cat ./tmp_cf6_{}dp{}g{}/hvref{}.out >> ./tmp_cf6_{}dp{}g{}/hvrefp{}g{}.out'\
+        .format(d, N, G, hvref_number, d, N, G, N, G)
     res.append(line_4)
 
 
@@ -58,23 +63,25 @@ while seed_number < 10:
     if seed_number == 10:
         seed_number = 99
 
-    line_1 = 'cp ./zdt3_nsgaii_results/{}/P{}G{}/zdt3_all_popmp{}g{}_seed0{}.out zdt3_all_popmp{}g{}.out'.format(n_eval, N, G, N, G, seed_number, N, G)
+    line_1 = 'cp ./cf6_{}d_results/{}/P{}G{}/cf6_{}d_all_popmp{}g{}_seed0{}.out cf6_{}d_all_popmp{}g{}.out'\
+        .format(d, n_eval, N, G, d, N, G, seed_number, d, N, G)
     res.append(line_1)
 
-    line_2 = './metrics < zdt3p{}g{}stall.in'.format(N, G)
+    line_2 = './metrics < cf6_{}d_p{}g{}stall.in'.format(d, N, G)
     res.append(line_2)
 
-    line_3 = 'cp hvref.out ./tmp_zdt3p{}g{}/hvref{}.out'.format(N, G, hvref_number)
+    line_3 = 'cp hvref.out ./tmp_cf6_{}dp{}g{}/hvref{}.out'.format(d, N, G, hvref_number)
     res.append(line_3)
 
-    line_4 = 'cat ./tmp_zdt3p{}g{}/hvref{}.out >> ./tmp_zdt3p{}g{}/hvrefp{}g{}.out'.format(N, G, hvref_number, N, G, N, G)
+    line_4 = 'cat ./tmp_cf6_{}dp{}g{}/hvref{}.out >> ./tmp_cf6_{}dp{}g{}/hvrefp{}g{}.out'\
+        .format(d, N, G, hvref_number, d, N, G, N, G)
     res.append(line_4)
 
 
 for element in res:
     print(element)
 
-with open('zdt3p{}g{}allscript'.format(N, G), 'w') as f:
+with open('cf6_{}d_p{}g{}allscript'.format(d, N, G), 'w') as f:
     for item in res:
         f.write(item + '\n')
 

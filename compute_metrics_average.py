@@ -4,13 +4,14 @@ import numpy as np
 
 N = 40
 G = 100
+d = 4
 
-path = 'tmp_zdt3p{}g{}/spacing{}.out'
+path = 'tmp_cf6_{}dp{}g{}/spacing{}.out'
 
 # 1.- Leer última fila de cada archivo
 acum = np.zeros(10)
 for i in range(1, 11):
-    df = pd.read_csv(path.format(N, G, i), header=None, sep='\t')
+    df = pd.read_csv(path.format(d, N, G, i), header=None, sep='\t')
 
     array = df[1].to_numpy()
     value = array[len(array)-1]
@@ -26,7 +27,7 @@ print('---------------------')
 
 acum = np.zeros(10)
 for j in range(11, 21):
-    df = pd.read_csv(path.format(N, G, j), header=None, sep='\t')
+    df = pd.read_csv(path.format(d, N, G, j), header=None, sep='\t')
 
     array = df[1].to_numpy()
     value = array[len(array)-1]

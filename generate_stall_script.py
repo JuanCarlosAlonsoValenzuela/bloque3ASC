@@ -1,10 +1,10 @@
-def generate_stall(N, G):
+def generate_stall(N, G, d):
     res = []
     res.append('1')
     res.append('1')
     res.append('2')
 
-    file_name = 'zdt3_all_popmp{}g{}.out'.format(N, G)
+    file_name = 'cf6_{}d_all_popmp{}g{}.out'.format(d, N, G)
     res.append(file_name)
 
     res.append(str(N))
@@ -14,18 +14,18 @@ def generate_stall(N, G):
     for element in res:
         print(element)
 
-    with open('zdt3p{}g{}stall.in'.format(N, G), 'w') as f:
+    with open('cf6_{}d_p{}g{}stall.in'.format(d, N, G), 'w') as f:
         for item in res:
             f.write(item + '\n')
 
 
-def generate_stall_basic(N, G):
+def generate_stall_basic(N, G, d):
     res = []
     res.append('1')
     res.append('1')
     res.append('2')
 
-    file_name = 'zdt3_all_popmp{}g{}.out'.format(N, G)
+    file_name = 'cf6_{}d_all_popmp{}g{}.out'.format(d, N, G)
     res.append(file_name)
 
     res.append(str(N))
@@ -35,24 +35,24 @@ def generate_stall_basic(N, G):
     for element in res:
         print(element)
 
-    with open('zdt3p{}g{}stallbasic.in'.format(N, G), 'w') as f:
+    with open('cf6_{}d_p{}g{}stallbasic.in'.format(d, N, G), 'w') as f:
         for item in res:
             f.write(item + '\n')
 
 
-def generate_stall_allcs_basic(N, G):
+def generate_stall_allcs_basic(N, G, d):
     res = []
     res.append('2')
     res.append('1')
     res.append('2')
 
-    file_name = 'zdt3_all_popmp{}g{}_de.out'.format(N, G)
+    file_name = 'cf6_{}d_all_popmp{}g{}_de.out'.format(d, N, G)
     res.append(file_name)
 
     res.append(str(N))
     res.append(str(G))
 
-    file_name = 'zdt3_all_popmp{}g{}_nsgaii.out'.format(N, G)
+    file_name = 'cf6_{}d_all_popmp{}g{}_nsgaii.out'.format(d, N, G)
     res.append(file_name)
 
     res.append(str(N))
@@ -63,6 +63,6 @@ def generate_stall_allcs_basic(N, G):
     for element in res:
         print(element)
 
-    with open('zdt3p{}g{}stallCS.in'.format(N, G), 'w') as f:
+    with open('cf6_{}dp{}g{}stallCS.in'.format(d, N, G), 'w') as f:
         for item in res:
             f.write(item + '\n')
