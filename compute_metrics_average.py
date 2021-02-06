@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 
 
-N = 40
-G = 100
-d = 4
+N = 200
+G = 50
+d = 16
 
 path = 'tmp_cf6_{}dp{}g{}/spacing{}.out'
 

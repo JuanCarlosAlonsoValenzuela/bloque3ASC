@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 
-N = 40
-G = 100
-d = 4
+N = 200
+G = 50
+d = 16
 
 path1 = 'tmp_cf6_{}dp{}g{}/cs1_{}.out'
 path2 = 'tmp_cf6_{}dp{}g{}/cs2_{}.out'
@@ -22,8 +22,8 @@ while j <= 10:
 
 average = np.mean(acum)
 dev = np.std(acum)
-print('Average: {}'.format(average))
-print('std: {}'.format(dev))
+print('Average: {}'.format(round(average, 11)))
+print('std: {}'.format(round(dev, 11)))
 print('---------------------')
 
 
@@ -41,6 +41,6 @@ while i <= 10:
 
 average = np.mean(acum)
 dev = np.std(acum)
-print('Average: {}'.format(average))
-print('std: {}'.format(dev))
+print('Average: {}'.format(round(average, 11)))
+print('std: {}'.format(round(dev, 11)))
 print('---------------------')

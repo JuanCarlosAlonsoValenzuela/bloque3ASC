@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-N = 40
-G = 100
-d = 4
+N = 200
+G = 50
+d = 16
 path = 'tmp_cf6_{}dp{}g{}/spacing{}.out'
 
 
@@ -23,7 +23,7 @@ for j in range(11, 21):
 red_patch = mpatches.Patch(color='red', label='nsgaii')
 blue_patch = mpatches.Patch(color='blue', label='de')
 
-plt.title("Hypervol with d={}, N={} and G={}".format(d, N, G))
+plt.title("Spacing with d={}, N={} and G={}".format(d, N, G))
 plt.legend(handles=[red_patch, blue_patch])
 plt.show()
 

@@ -3,9 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-N = 40
-G = 100
-d = 4
+N = 200
+G = 50
+d = 16
+
 path1 = 'tmp_cf6_{}dp{}g{}/cs1_{}.out'
 path2 = 'tmp_cf6_{}dp{}g{}/cs2_{}.out'
 
